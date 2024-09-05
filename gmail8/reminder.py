@@ -8,13 +8,13 @@ urllib3.disable_warnings()
 class reminder():
     def __init__(self, **kwargs):
         assert 'url' in kwargs.keys(), 'url should be given'
-        assert 'email' in kwargs.keys(), 'email should be given'
-        assert '@' in kwargs['email'], f'The email address should have the correct format,got {kwargs["email"]}'
-        assert 'mode' not in kwargs.keys(), 'mode should not be given'
-        assert 'csrfmiddlewaretoken' not in kwargs.keys(), 'csrfmiddlewaretoken should not be given'
+        assert 'to' in kwargs.keys(), 'target email should be given'
+        assert '@' in kwargs['to'], f'The email address should have the correct format,got {kwargs["to"]}'
         assert 'Error' not in kwargs.keys(), 'Error should not be given'
         assert 'CostTime' not in kwargs.keys(), 'CostTime should not be given'
         assert 'FilePath' not in kwargs.keys(), 'FilePath should not be given'
+        assert 'Ppid' not in kwargs.keys(), 'Ppid should not be given'
+
         if 'url' in kwargs.keys():
             setattr(self,'url',kwargs['url'])
         self.data = dict()
@@ -26,7 +26,7 @@ class reminder():
                 self.files = v
                 continue
             self.data[k] = v
-        self.data['mode'] = 'remind'
+
         if not os.path.exists('.emailreminder_'+str(self.ppid)):
             open('.emailreminder_'+str(self.ppid),'a+')
         self.t1 = time.time()
@@ -59,8 +59,6 @@ class reminder():
         session.headers = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) '
                 'Chrome/51.0.2704.63 Safari/537.36','Referer':self.url}
         session.get(self.url)
-        token = session.cookies.get('csrftoken')
-        self.data['csrfmiddlewaretoken'] = token
         self.data['Ppid'] = self.ppid
         if isinstance(result, str):
             self.data['result'] = result
@@ -92,4 +90,3 @@ class reminder():
                     filename = file[file.rfind(os.sep)+1:]
                     files[filename] = open(file,'rb')
         return files
-

@@ -1,21 +1,18 @@
 from setuptools import setup, find_packages
 
-
-
 if __name__ == '__main__':
-    version = '0.0.5'
+    version = '0.0.1'
     setup(
-        name='emailreminder',
+        name='gmail8',
         version=version,
         description = 'A decorator',
-        long_description = 'Use http post requests to send a email to remind you that your program has been break up or finished normally.',
+        long_description = 'Make your email powerful using python.',
         install_requires=[
             'requests',
         ],
-        author='Junjie Zhang',
-        author_email='zjunjie@hust.edu.cn',
+        author='Junbin Gao',
+        author_email='gao.junbin.cn@gmail.com',
         license='Apache License 2.0',
         packages=find_packages(),
-        url='https://github.com/Oswells/reminder.git'
+        url='https://github.com/gaojunbin/gmail.git'
     )
-

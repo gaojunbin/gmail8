@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  flask-app:
+    build:
+      context: .
+    ports:
+      - "52681:5000"
+    volumes:
+      - .:/app
+    environment:
+      - FLASK_ENV=production
+      - gmail_mail=$gmail_mail
+      - gmail_passkey=$gmail_passkey

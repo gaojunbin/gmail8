@@ -1,1 +1,0 @@
-from emailreminder.emailreminder import reminder
